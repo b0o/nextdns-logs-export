@@ -25,13 +25,13 @@ Usage
 - 6. Look for the `sid=<sid>;` entry and copy the string between (but not
      including) the `sid=` and the `;`.
 
-4. Run `index.js`, passing your configuration ID and session token, and redirect stdout to a file:
+5. Run `index.js`, passing your configuration ID and session token, and redirect stdout to a file:
 
 ```sh
 $ ./index.js "<configId>" "<sessionId>" > nextdns-logs.json
 ```
 
-5. You can use [jq](https://github.com/stedolan/jq) to transform the JSON output as desired, e.g:
+6. You can use [jq](https://github.com/stedolan/jq) to transform the JSON output as desired, e.g:
 
 ```sh
 # count the number of DNS queries made for the domain github.com
