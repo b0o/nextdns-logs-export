@@ -1,7 +1,7 @@
 NextDNS Logs Export
 ===================
 
-Export a your NextDNS logs as JSON.
+Export your NextDNS logs as JSON.
 
 Usage
 -----
