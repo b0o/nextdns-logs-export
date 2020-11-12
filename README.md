@@ -6,6 +6,11 @@ Export your NextDNS logs as JSON.
 Usage
 -----
 
+```
+$ nextdns-logs-export -h
+usage: nextdns-logs-export <configId> <sessionId> [before] [after]
+```
+
 1. Install this tool locally:
 - 1. `git clone https://github.com/b0o/nextdns-logs-export`
 - 2. `cd nextdns-logs-export`
@@ -31,7 +36,10 @@ Usage
 $ ./index.js "<configId>" "<sessionId>" > nextdns-logs.json
 ```
 
-6. You can use [jq](https://github.com/stedolan/jq) to transform the JSON output as desired, e.g:
+6. Optionally, define the timespan in which to download logs with `[before]`
+   and `[after]`, which are Unix millisecond timestamps.
+
+7. You can use [jq](https://github.com/stedolan/jq) to transform the JSON output as desired, e.g:
 
 ```sh
 # count the number of DNS queries made for the domain github.com

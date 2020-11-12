@@ -47,10 +47,10 @@ const getLogsPage = async (configId, sid, before = null) => {
   return res.json()
 }
 
-const getLogs = (pst, sid) => ({
+const getLogs = (pst, sid, before = null, after = 0) => ({
   async* [Symbol.asyncIterator]() {
     let res
-    let next = null
+    let next = before
     do {
       // eslint-disable-next-line no-await-in-loop
       res = await getLogsPage(pst, sid, next)
@@ -60,17 +60,22 @@ const getLogs = (pst, sid) => ({
       }))
       yield logs
       next = logs[logs.length - 1].timestamp
-    } while (res.hasMore)
+    } while (res.hasMore && next >= after)
   },
 })
 
 const main = async () => {
-  if (process.argv.length !== 4) {
-    throw new Error(`usage: ${process.argv[1]} <configId> <sessionId>\n`)
+  if (process.argv.length < 4) {
+    throw new Error(`usage: ${process.argv[1]} <configId> <sessionId> [before] [after]\n`)
   }
   const configId = process.argv[2]
   const sid = process.argv[3]
-  for await (const chunk of getLogs(configId, sid)) {
+  const before = process.argv.length >= 5 ? process.argv[4] : null
+  const after = process.argv.length >= 6 ? process.argv[5] : 0
+  if (before !== null && after > before) {
+    throw new Error("expected before > after")
+  }
+  for await (const chunk of getLogs(configId, sid, before, after)) {
     for (const entry of chunk) {
       process.stdout.write(`${JSON.stringify(entry, null, 2)}\n`)
     }
