@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/b0o/nextdns-logs-export#readme",
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "@adobe/node-fetch-retry": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^7.1.0",

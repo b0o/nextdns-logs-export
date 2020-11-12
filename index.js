@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-const fetch = require("node-fetch")
+const fetch = require("@adobe/node-fetch-retry")
 
 const getLogsPage = async (configId, sid, before = null) => {
   const url = `https://api.nextdns.io/configurations/${configId}/logs?lng=en${before ? `&before=${before}` : ""}`
